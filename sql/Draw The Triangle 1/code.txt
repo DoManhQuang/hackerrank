@@ -1,0 +1,2 @@
+select RPAD('* ',42-2*rownum,' *') from all_objects
+where rownum <=20;

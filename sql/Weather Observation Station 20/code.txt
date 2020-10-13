@@ -1,0 +1,15 @@
+select round((tbl1.lat_n+tbl2.lat_n)/2, 4)
+from 
+    (select tb1.r1, tb1.lat_n
+    from (  select rownum r1, lat_n
+            from(select lat_n from station order by lat_n)
+         ) tb1
+    where tb1.r1 = (select ceil((count(*)+1)/2) r1 from station)
+    ) tbl1,
+   (
+    select tb2.r2, tb2.lat_n
+    from (  select rownum r2, lat_n
+            from (select lat_n from station order by lat_n)
+         ) tb2
+    where tb2.r2 = (select floor((count(*)+1)/2) r2 from station)
+   ) tbl2;
